@@ -257,11 +257,23 @@ footer{padding:40px 0;border-top:1px solid var(--line);color:var(--dim);font-siz
 .journey{padding:30px}
 .j-title{font-size:20px;margin-bottom:18px}
 .jl{list-style:none;position:relative}
-.jl::before{content:"";position:absolute;left:27px;top:8px;bottom:8px;width:2px;background:linear-gradient(var(--cyan),var(--violet),var(--pink));opacity:.45}
-.jl li{display:flex;gap:16px;padding-bottom:18px;position:relative}
+.jl::before{content:"";position:absolute;left:27px;top:10px;bottom:10px;width:2px;background:linear-gradient(var(--acc),var(--acc2));opacity:.55;transform:scaleY(0);transform-origin:top;transition:transform 1.8s cubic-bezier(.65,0,.35,1) .2s}
+.jl::after{content:"";position:absolute;left:24px;top:10px;width:8px;height:8px;border-radius:50%;background:var(--acc);box-shadow:0 0 0 4px rgba(var(--acc-rgb),.18),0 0 14px rgba(var(--acc-rgb),.8);opacity:0}
+.journey.in .jl::before{transform:scaleY(1)}
+.journey.in .jl::after{animation:travel 4.5s cubic-bezier(.45,0,.55,1) 2s infinite}
+@keyframes travel{0%{top:10px;opacity:0}8%{opacity:1}88%{opacity:1}100%{top:calc(100% - 18px);opacity:0}}
+.jl li{display:flex;gap:16px;padding-bottom:14px;position:relative;opacity:0;transform:translate3d(-18px,0,0);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);transition-delay:calc(.35s + var(--k)*.22s)}
 .jl li:last-child{padding-bottom:0}
-.jl .yr{flex:none;width:56px;height:28px;border-radius:999px;display:grid;place-items:center;font-family:'JetBrains Mono';font-size:12px;background:var(--bg2);border:1px solid var(--line2);color:var(--cyan);position:relative;z-index:1}
-.jl li.next .yr{background:var(--grad);color:var(--on-acc);border:0;font-weight:700}
+.journey.in .jl li{opacity:1;transform:none}
+.jl .yr{flex:none;width:56px;height:28px;border-radius:999px;display:grid;place-items:center;font-family:'JetBrains Mono',monospace;font-size:12px;background:var(--bg2);border:1px solid var(--line2);color:var(--acc);position:relative;z-index:1;transform:scale(.6);transition:transform .6s cubic-bezier(.34,1.56,.64,1),background .35s,color .35s,border-color .35s;transition-delay:calc(.45s + var(--k)*.22s),0s,0s,0s}
+.journey.in .jl .yr{transform:scale(1)}
+.jl .jc{flex:1;padding:6px 12px 10px;margin:-6px 0 0 -6px;border-radius:12px;border:1px solid transparent;transition:background .35s,border-color .35s,transform .45s cubic-bezier(.16,1,.3,1)}
+.jl li:hover .jc{background:rgba(var(--acc-rgb),.06);border-color:rgba(var(--acc-rgb),.2);transform:translateX(4px)}
+.jl li:hover .yr{background:var(--acc);color:var(--on-acc);border-color:var(--acc);transition-delay:0s}
+.jl li.next .yr{background:var(--acc);color:var(--on-acc);border:0;font-weight:700}
+.jl li.next .yr::after{content:"";position:absolute;inset:-4px;border-radius:999px;border:2px solid var(--acc);opacity:0}
+.journey.in .jl li.next .yr::after{animation:ring 2.2s ease-out 2.4s infinite}
+@keyframes ring{0%{opacity:.7;transform:scale(1)}100%{opacity:0;transform:scale(1.35)}}
 .jl b{font-size:15px;display:block}
 .jl p{font-size:13.5px;color:var(--muted);margin-top:2px}
 .sub-h{font-size:22px;margin:44px 0 18px}
@@ -357,6 +369,7 @@ body.ready nav{transform:none}
   .scroll-hint{display:none}
 }
 @media (prefers-reduced-motion:reduce){
+  .jl li,.jl .yr{opacity:1!important;transform:none!important}.jl::before{transform:none!important}.jl::after{display:none}
   #loader{display:none}.hero [data-i],nav,#net{opacity:1!important;transform:none!important;clip-path:none!important}
   *,*::before,*::after{animation:none!important;transition:none!important}
   .reveal{opacity:1;transform:none}
@@ -425,7 +438,7 @@ body.ready nav{transform:none}
         <div><div class="me-name">Nabin Kumar KC</div><div class="me-head">Machine Learning &amp; AI · Python Developer</div><div class="me-loc"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:-2px;color:var(--acc)"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> Wichita, Kansas, USA</div></div>
       </div>
       <ul class="facts">
-        <li><i data-ic="cap"></i><div><b>MS in Computer Science</b><span>Wichita State University · graduating Dec 2026</span></div></li>
+        <li><i data-ic="cap"></i><div><b>MS in Computer Science</b><span>Wichita State University</span></div></li>
         <li><i data-ic="book"></i><div><b>Published researcher</b><span>Springer, Lecture Notes in Electrical Engineering (2024)</span></div></li>
         <li><i data-ic="award"></i><div><b>5 certifications</b><span>Google Cybersecurity, freeCodeCamp, YBI Foundation and more</span></div></li>
         <li><i data-ic="brief"></i><div><b>Open to ML, AI &amp; Data Science roles</b><span>On-site · Hybrid · Remote</span></div></li>
@@ -444,9 +457,9 @@ body.ready nav{transform:none}
     <p class="sec-sub reveal">The person behind the models: what drives me, how I work, and the road that brought me here.</p>
     <div class="about-grid">
       <div class="card about-text reveal">
-        <p>Hi, I'm <strong>Nabin</strong>, a Machine Learning and AI engineer based in <strong>Wichita, Kansas</strong>. I earned my Bachelor of Engineering in Computer Science from <strong>Nitte Meenakshi Institute of Technology, Bangalore</strong>, and I'm completing my <strong>Master's degree in Computer Science at Wichita State University</strong> (December 2026).</p>
-        <p>My journey into tech started with the web. As a <strong>Frontend Web Developer Intern at The Sparks Foundation</strong>, I built a donation website with a live Razorpay payment gateway, and learned what it takes to ship something real people use. As a <strong>Machine Learning with Python Intern at YBI Foundation</strong>, I found what I love most: exploring data, cleaning it, and turning it into models that make predictions.</p>
-        <p>In my final year of engineering, my team and I built a system that lets you control a computer with hand gestures, and that work was <strong>published by Springer</strong>. It was my first taste of research. At Wichita State, I work as a <strong>Graduate Research Assistant</strong>, building an OCR and machine learning system that reads scanned admissions documents, turns them into applicant profiles and supports Admit / Review / Deny decisions. I present my results directly to faculty advisors.</p>
+        <p>Hi, I'm <strong>Nabin</strong>, a Machine Learning and AI engineer with a <strong>Master's in Computer Science from Wichita State University</strong> and a <strong>Bachelor of Engineering in Computer Science from Nitte Meenakshi Institute of Technology, Bangalore</strong>.</p>
+        <p>My path into machine learning took shape as a <strong>Machine Learning with Python Intern at YBI Foundation</strong>, where I found what I love most: exploring data, cleaning it, and turning it into models that make real predictions.</p>
+        <p>In my final year of engineering, my team and I built a system that lets you control a computer with hand gestures, and that work was <strong>published by Springer</strong>. It was my first taste of research. As a <strong>Graduate Research Assistant at Wichita State University</strong>, I built an OCR and machine learning system that reads scanned admissions documents, turns them into applicant profiles and supports Admit / Review / Deny decisions, presenting my results directly to faculty advisors.</p>
         <p><strong>What I bring to a team:</strong> curiosity, patience with hard problems, and care for the full picture: clean data, the right model, honest evaluation, and how it all fits into a real system. I enjoy collaborating, and I'm always happy to connect with engineers, researchers and recruiters working in AI.</p>
         <div class="focus">
           <span>Always learning</span><span>Loves hard problems</span><span>Team collaborator</span><span>Builds things people use</span><span>Bangalore → Wichita</span>
@@ -455,13 +468,13 @@ body.ready nav{transform:none}
       <div class="card journey reveal">
         <h3 class="j-title">My journey</h3>
         <ol class="jl">
-          <li><span class="yr">2019</span><div><b>Started engineering in Bangalore</b><p>Began my BE in Computer Science at NMIT and fell in love with programming.</p></div></li>
-          <li><span class="yr">2022</span><div><b>First internships &amp; certifications</b><p>Front-end developer at The Sparks Foundation, then Machine Learning with Python at YBI Foundation. Earned freeCodeCamp certificates in Data Analysis with Python and Responsive Web Design.</p></div></li>
-          <li><span class="yr">2023</span><div><b>Graduated &amp; built my research project</b><p>Completed my BE and built a Hand Gesture Control System with OpenCV and MediaPipe. Earned the Google Cybersecurity Certificate.</p></div></li>
-          <li><span class="yr">2024</span><div><b>Published by Springer</b><p>My hand-gesture research appeared in Lecture Notes in Electrical Engineering, vol. 1104.</p></div></li>
-          <li><span class="yr">2025</span><div><b>Moved to the U.S.</b><p>Started my MS in Computer Science at Wichita State University, going deeper into deep learning, computer vision and AI for cybersecurity.</p></div></li>
-          <li><span class="yr">2026</span><div><b>Graduate Research Assistant</b><p>Joined research at WSU building ML and automation systems; graduating with my MS in December.</p></div></li>
-          <li class="next"><span class="yr">Next</span><div><b>A full-time role in ML, AI or Data Science</b><p>Ready to bring this experience to a team building impactful AI.</p></div></li>
+          <li style="--k:0"><span class="yr">2019</span><div class="jc"><b>Started engineering in Bangalore</b><p>Began my BE in Computer Science at NMIT and fell in love with programming.</p></div></li>
+          <li style="--k:1"><span class="yr">2022</span><div class="jc"><b>Machine learning internship &amp; certificates</b><p>Machine Learning with Python Intern at YBI Foundation. Earned freeCodeCamp certificates in Data Analysis with Python and Responsive Web Design.</p></div></li>
+          <li style="--k:2"><span class="yr">2023</span><div class="jc"><b>Graduated &amp; built my research project</b><p>Completed my BE and built a Hand Gesture Control System with OpenCV and MediaPipe. Earned the Google Cybersecurity Certificate.</p></div></li>
+          <li style="--k:3"><span class="yr">2024</span><div class="jc"><b>Published by Springer</b><p>My hand-gesture research appeared in Lecture Notes in Electrical Engineering, vol. 1104.</p></div></li>
+          <li style="--k:4"><span class="yr">2025</span><div class="jc"><b>Moved to the U.S.</b><p>Started my MS in Computer Science at Wichita State University, going deeper into deep learning, computer vision and AI for cybersecurity.</p></div></li>
+          <li style="--k:5"><span class="yr">2026</span><div class="jc"><b>Graduate Research Assistant &amp; Master's degree</b><p>Built ML and automation systems as a Graduate Research Assistant and earned my Master's in Computer Science from Wichita State University.</p></div></li>
+          <li class="next" style="--k:6"><span class="yr">Next</span><div class="jc"><b>A full-time role in ML, AI or Data Science</b><p>Ready to bring this experience to a team building impactful AI.</p></div></li>
         </ol>
       </div>
     </div>
@@ -709,7 +722,7 @@ const projects=[
   m:[['5','end-to-end projects']],
   tags:['Pandas','Scikit-learn','PCA','KNN'],links:[['code',GH+'ybi-foundation-project']]},
  {f:'web',feat:false,ic:'heart',badge:null,title:'Donation Platform',
-  desc:'A multi-page donation website with Razorpay payment integration, GSAP animations and a contact form, built during my Sparks Foundation internship.',
+  desc:'A multi-page donation website with Razorpay payment integration, GSAP animations and a contact form, built with HTML, CSS and JavaScript.',
   m:[['3','pages'],['Razorpay','payments']],
   tags:['HTML','CSS','JavaScript','GSAP'],links:[['code',GH+'Donate']]},
  {f:'web',feat:false,ic:'lock',badge:null,title:'Android Encryption App',
