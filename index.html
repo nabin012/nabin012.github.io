@@ -431,6 +431,8 @@ body.ready .ft:nth-child(1){animation-delay:1.8s}body.ready .ft:nth-child(2){ani
 @media (max-width:980px){.hl{grid-template-columns:1fr 1fr}.hl-i:nth-child(3){border-left:0}.hl-i:nth-child(n+3){border-top:1px solid var(--line)}}
 @media (max-width:760px){.hl-wrap{margin-top:36px}.hl{grid-template-columns:1fr}.hl-i{border-left:0!important;padding:14px 4px}.hl-i+.hl-i{border-top:1px solid var(--line)}.avatar{width:128px;height:128px}}
 
+
+
 /* responsive */
 @media (max-width:980px){
   .hero-grid,.about-grid{grid-template-columns:1fr}
@@ -545,14 +547,7 @@ body.ready .ft:nth-child(1){animation-delay:1.8s}body.ready .ft:nth-child(2){ani
       </ul>
     </div>
   </div>
-  <div class="wrap hl-wrap">
-    <div class="hl" data-i="7">
-      <a href="#research" class="hl-i"><i data-ic="book"></i><span><b>Springer-published</b> research (2024)</span></a>
-      <a href="#experience" class="hl-i"><i data-ic="brief"></i><span><b>Graduate Research Assistant</b> at Wichita State</span></a>
-      <a href="#projects" class="hl-i"><i data-ic="code"></i><span><b>12 projects</b> with code on GitHub</span></a>
-      <a href="#skills" class="hl-i"><i data-ic="award"></i><span><b>5 certifications</b> incl. Google Cybersecurity</span></a>
-    </div>
-  </div>
+  <a href="#about" class="scroll-hint" data-i="6" aria-label="Scroll down"><span></span>SCROLL</a>
 </header>
 
 <main>
@@ -937,7 +932,30 @@ document.getElementById('themeBtn').addEventListener('click',()=>{const r=docume
    if(d2<L2){x.strokeStyle='rgba('+C.a+','+((1-Math.sqrt(d2)/LINK)*.22).toFixed(3)+')';x.beginPath();x.moveTo(a.x,a.y);x.lineTo(b.x,b.y);x.stroke()}}}
   if(m.x>-999){for(const p of pts){const dx=p.x-m.x,dy=p.y-m.y,d2=dx*dx+dy*dy;if(d2<32400){x.strokeStyle='rgba('+C.b+','+((1-Math.sqrt(d2)/180)*.35).toFixed(3)+')';x.beginPath();x.moveTo(p.x,p.y);x.lineTo(m.x,m.y);x.stroke()}}}
   for(const p of pts){x.fillStyle=p.h>.7?'rgba('+C.b+',.9)':'rgba('+C.a+',.85)';x.beginPath();x.arc(p.x,p.y,p.r,0,6.283);x.fill()}
+  drawFloor(t);
   requestAnimationFrame(frame)}
+ /* futuristic perspective floor */
+ function drawFloor(t){const fh=Math.min(230,H*.24),y0=H-fh,cx=W/2,ph=((t||0)/3200)%1,light=document.documentElement.dataset.theme==='light';
+  const k=light?.55:1;
+  // horizontal lines rushing toward viewer
+  const rows=9;
+  for(let i=0;i<rows;i++){const f=(i+ph)/rows,yy=y0+fh*f*f;const a=Math.pow(f,1.6)*.34*k;
+   x.strokeStyle='rgba('+C.a+','+a.toFixed(3)+')';x.lineWidth=1+f*.8;x.beginPath();x.moveTo(0,yy);x.lineTo(W,yy);x.stroke()}
+  // vertical lines converging to vanishing point
+  const cols=26,spread=W*1.9;
+  for(let j=0;j<=cols;j++){const bx=cx-spread/2+spread*j/cols;
+   const g=x.createLinearGradient(0,y0,0,H);g.addColorStop(0,'rgba('+C.a+',0)');g.addColorStop(1,'rgba('+C.a+','+(.26*k).toFixed(3)+')');
+   x.strokeStyle=g;x.lineWidth=1;x.beginPath();x.moveTo(cx+(bx-cx)*.04,y0);x.lineTo(bx,H);x.stroke()}
+  // sweeping light band
+  const sp=((t||0)/7000)%1,sx=-W*.3+sp*W*1.6;const sg=x.createLinearGradient(sx-W*.18,0,sx+W*.18,0);
+  sg.addColorStop(0,'rgba('+C.b+',0)');sg.addColorStop(.5,'rgba('+C.b+','+(.10*k).toFixed(3)+')');sg.addColorStop(1,'rgba('+C.b+',0)');
+  x.fillStyle=sg;x.fillRect(0,y0,W,fh);
+  // glowing horizon line
+  const pulse=.65+.35*Math.sin((t||0)/650);const hg=x.createLinearGradient(W*.08,0,W*.92,0);
+  hg.addColorStop(0,'rgba('+C.a+',0)');hg.addColorStop(.5,'rgba('+C.a+','+(.75*pulse*k).toFixed(3)+')');hg.addColorStop(1,'rgba('+C.a+',0)');
+  x.fillStyle=hg;x.fillRect(W*.08,y0-1,W*.84,2);
+  const hb=x.createLinearGradient(0,y0-26,0,y0+26);hb.addColorStop(0,'rgba('+C.a+',0)');hb.addColorStop(.5,'rgba('+C.a+','+(.10*pulse*k).toFixed(3)+')');hb.addColorStop(1,'rgba('+C.a+',0)');
+  x.fillStyle=hb;x.fillRect(W*.15,y0-26,W*.7,52);}
  let rt;addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(size,150)});
  let onScreen=true;
  const resume=()=>{const r=onScreen&&!document.hidden&&!reduce;if(r&&!run){run=true;requestAnimationFrame(frame)}else run=r};
