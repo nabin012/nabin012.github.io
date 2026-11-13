@@ -358,6 +358,27 @@ body.ready .ft{animation:ftglow 6s ease-in-out infinite}
 body.ready .ft:nth-child(1){animation-delay:1.8s}body.ready .ft:nth-child(2){animation-delay:3.8s}body.ready .ft:nth-child(3){animation-delay:5.8s}
 @keyframes ftglow{0%,30%,100%{border-color:var(--line2);box-shadow:none}10%,20%{border-color:rgba(var(--acc-rgb),.6);box-shadow:0 0 0 4px rgba(var(--acc-rgb),.08),0 8px 24px -12px rgba(var(--acc-rgb),.6)}}
 
+
+/* hero ML pipeline */
+.pipeline{max-width:570px;margin:26px 0 34px}
+.pipeline svg{width:100%;height:auto;display:block;overflow:visible}
+.pe{stroke:var(--acc2);stroke-width:1;opacity:.22}
+.pl{fill:none;stroke:var(--line2);stroke-width:1.5;stroke-dasharray:3 5}
+.pbox{fill:rgba(var(--card-rgb),.85);stroke:rgba(var(--acc-rgb),.35);stroke-width:1.2}
+.pbox.dec{stroke:rgba(var(--ok-rgb),.55)}
+.pic{color:var(--acc)}
+.pn{fill:var(--bg);stroke:var(--acc2);stroke-width:2;animation:pnode 3s ease-in-out infinite}
+.pn.out{stroke:var(--acc)}
+@keyframes pnode{0%,8%,30%,100%{fill:var(--bg)}14%,22%{fill:var(--acc)}}
+.pd{fill:var(--acc);filter:drop-shadow(0 0 4px rgba(var(--acc-rgb),.9))}
+.ck{fill:rgba(var(--ok-rgb),.15);stroke:var(--ok);stroke-width:1.6}
+.ckm{fill:none;stroke:var(--ok);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:16;stroke-dashoffset:16;animation:ckdraw 3s ease-in-out infinite}
+@keyframes ckdraw{0%,84%{stroke-dashoffset:16}92%,100%{stroke-dashoffset:0}}
+.pdec{animation:pglow 3s ease-in-out infinite}
+@keyframes pglow{0%,84%,100%{opacity:.75}90%{opacity:1}}
+.plbl{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.18em;fill:var(--dim)}
+.plbl.strong{font-family:Inter,sans-serif;font-size:13.5px;letter-spacing:0;font-weight:600;fill:var(--text)}
+
 /* responsive */
 @media (max-width:980px){
   .hero-grid,.about-grid{grid-template-columns:1fr}
@@ -383,6 +404,7 @@ body.ready .ft:nth-child(1){animation-delay:1.8s}body.ready .ft:nth-child(2){ani
   .scroll-hint{display:none}
 }
 @media (prefers-reduced-motion:reduce){
+  .pn,.ckm,.pdec{animation:none!important}.ckm{stroke-dashoffset:0}.pd{display:none}
   body.ready .ft{animation:none}
   .jl li,.jl .yr{opacity:1!important;transform:none!important}.jl::before{transform:none!important}.jl::after{display:none}
   #loader{display:none}.hero [data-i],nav,#net{opacity:1!important;transform:none!important;clip-path:none!important}
@@ -434,11 +456,10 @@ body.ready .ft:nth-child(1){animation-delay:1.8s}body.ready .ft:nth-child(2){ani
       <span class="pill" data-i="0"><span class="dot"></span>Open to ML, AI &amp; Data Science roles</span>
       <h1 data-i="1">Hi, I'm <span class="grad">Nabin Kumar KC</span></h1>
       <div class="role" data-i="2">I'm <span id="art">a</span> <b id="typed"></b><span class="caret"></span></div>
-      <p class="lead tagline" data-i="3">I build machine learning systems that turn messy, real-world data into <strong>decisions people can trust</strong>.</p>
-      <div class="focus-tags" data-i="4">
-        <span class="ft"><i data-ic="eye"></i>Computer Vision</span>
-        <span class="ft"><i data-ic="shield"></i>AI for Cybersecurity</span>
-        <span class="ft"><i data-ic="scan"></i>Document AI &amp; OCR</span>
+      <div class="pipeline" data-i="3" aria-label="Animated diagram: documents, images and network traffic flow through a neural network and become a decision" role="img">
+        <svg viewBox="0 0 580 176" preserveAspectRatio="xMinYMid meet">
+          <g class="pedges"><line x1="210" y1="48" x2="270" y2="33" class="pe"/><line x1="210" y1="48" x2="270" y2="63" class="pe"/><line x1="210" y1="48" x2="270" y2="93" class="pe"/><line x1="210" y1="48" x2="270" y2="123" class="pe"/><line x1="210" y1="78" x2="270" y2="33" class="pe"/><line x1="210" y1="78" x2="270" y2="63" class="pe"/><line x1="210" y1="78" x2="270" y2="93" class="pe"/><line x1="210" y1="78" x2="270" y2="123" class="pe"/><line x1="210" y1="108" x2="270" y2="33" class="pe"/><line x1="210" y1="108" x2="270" y2="63" class="pe"/><line x1="210" y1="108" x2="270" y2="93" class="pe"/><line x1="210" y1="108" x2="270" y2="123" class="pe"/><line x1="270" y1="33" x2="330" y2="48" class="pe"/><line x1="270" y1="33" x2="330" y2="78" class="pe"/><line x1="270" y1="33" x2="330" y2="108" class="pe"/><line x1="270" y1="63" x2="330" y2="48" class="pe"/><line x1="270" y1="63" x2="330" y2="78" class="pe"/><line x1="270" y1="63" x2="330" y2="108" class="pe"/><line x1="270" y1="93" x2="330" y2="48" class="pe"/><line x1="270" y1="93" x2="330" y2="78" class="pe"/><line x1="270" y1="93" x2="330" y2="108" class="pe"/><line x1="270" y1="123" x2="330" y2="48" class="pe"/><line x1="270" y1="123" x2="330" y2="78" class="pe"/><line x1="270" y1="123" x2="330" y2="108" class="pe"/><line x1="330" y1="48" x2="390" y2="78" class="pe"/><line x1="330" y1="78" x2="390" y2="78" class="pe"/><line x1="330" y1="108" x2="390" y2="78" class="pe"/></g><path id="pp0" d="M60 37 C 130 37, 140 78, 210 78" class="pl"/><path id="pp1" d="M60 83 C 130 83, 140 78, 210 78" class="pl"/><path id="pp2" d="M60 129 C 130 129, 140 78, 210 78" class="pl"/><path id="ppo" d="M397 78 L 466 78" class="pl"/><g transform="translate(18,16)"><rect width="42" height="42" rx="11" class="pbox"/><g transform="translate(9,9)" class="pic" data-pic="scan"></g></g><g transform="translate(18,62)"><rect width="42" height="42" rx="11" class="pbox"/><g transform="translate(9,9)" class="pic" data-pic="eye"></g></g><g transform="translate(18,108)"><rect width="42" height="42" rx="11" class="pbox"/><g transform="translate(9,9)" class="pic" data-pic="nodes"></g></g><circle cx="210" cy="48" r="5.5" class="pn" style="animation-delay:0.55s"/><circle cx="210" cy="78" r="5.5" class="pn" style="animation-delay:0.55s"/><circle cx="210" cy="108" r="5.5" class="pn" style="animation-delay:0.55s"/><circle cx="270" cy="33" r="5.5" class="pn" style="animation-delay:0.87s"/><circle cx="270" cy="63" r="5.5" class="pn" style="animation-delay:0.87s"/><circle cx="270" cy="93" r="5.5" class="pn" style="animation-delay:0.87s"/><circle cx="270" cy="123" r="5.5" class="pn" style="animation-delay:0.87s"/><circle cx="330" cy="48" r="5.5" class="pn" style="animation-delay:1.19s"/><circle cx="330" cy="78" r="5.5" class="pn" style="animation-delay:1.19s"/><circle cx="330" cy="108" r="5.5" class="pn" style="animation-delay:1.19s"/><circle cx="390" cy="78" r="7" class="pn out" style="animation-delay:1.51s"/><g transform="translate(466,54)" class="pdec"><rect width="100" height="48" rx="12" class="pbox dec"/><g transform="translate(10,12)"><circle cx="12" cy="12" r="11" class="ck"/><path d="m7 12 3.5 3.5L17 9" class="ckm"/></g><text x="41" y="29" class="plbl strong">Decision</text></g><circle r="3.6" class="pd"><animateMotion dur="3s" begin="0.00s" repeatCount="indefinite" keyPoints="0;1;1" keyTimes="0;0.4;1" calcMode="linear"><mpath href="#pp0"/></animateMotion><animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;0.05;0.36;0.42;1" dur="3s" begin="0.00s" repeatCount="indefinite"/></circle><circle r="3.6" class="pd"><animateMotion dur="3s" begin="0.12s" repeatCount="indefinite" keyPoints="0;1;1" keyTimes="0;0.4;1" calcMode="linear"><mpath href="#pp1"/></animateMotion><animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;0.05;0.36;0.42;1" dur="3s" begin="0.12s" repeatCount="indefinite"/></circle><circle r="3.6" class="pd"><animateMotion dur="3s" begin="0.24s" repeatCount="indefinite" keyPoints="0;1;1" keyTimes="0;0.4;1" calcMode="linear"><mpath href="#pp2"/></animateMotion><animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;0.05;0.36;0.42;1" dur="3s" begin="0.24s" repeatCount="indefinite"/></circle><circle r="4" class="pd"><animateMotion dur="3s" repeatCount="indefinite" keyPoints="0;0;1;1" keyTimes="0;0.66;0.86;1" calcMode="linear"><mpath href="#ppo"/></animateMotion><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.64;0.68;0.86;0.9" dur="3s" repeatCount="indefinite"/></circle><text x="39" y="168" class="plbl" text-anchor="middle">DATA</text><text x="300" y="168" class="plbl" text-anchor="middle">MODEL</text><text x="516" y="168" class="plbl" text-anchor="middle">INSIGHT</text>
+        </svg>
       </div>
       <div class="cta-row" data-i="5">
         <a href="#about" class="btn btn-primary">Get to know me →</a>
@@ -696,6 +717,7 @@ const IC={
 };
 const svgIc=k=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${IC[k]||''}</svg>`;
 document.querySelectorAll('[data-ic]').forEach(el=>el.innerHTML=svgIc(el.dataset.ic));
+document.querySelectorAll('[data-pic]').forEach(g=>g.innerHTML=`<g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${IC[g.dataset.pic]}</g>`);
 /* ---------- data ---------- */
 const GH='https://github.com/nabin012/';
 const ML='https://github.com/nabin012/ML_Projects/tree/main/';
